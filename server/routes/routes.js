@@ -10,6 +10,7 @@ router.post("/user-update", user.update)
 router.get("/increaseStrike/:id", user.increaseStrikes)
 router.get("/resetStrikes", user.resetStrikes)
 router.get("/getUser/:id", user.getUserData)
+router.get("/getAssigned/:id", user.getAssigned)
 
 //VOLUNTEER / TECNIC
 

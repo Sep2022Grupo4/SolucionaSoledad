@@ -1,6 +1,7 @@
 const Users = require("../models/users.model")
 const conexion = require("../database/mysql")
 const { Op } = require("sequelize");
+const Users_volunteers  = require("../models/users_volunteers.model")
 
 
 const user = {
@@ -121,6 +122,22 @@ const user = {
             await conexion.cerrar(con);
         }
     },
+    getAssigned: async (req, res)=>{
+        const con = await conexion.abrir(req.cookies.session);
+        try {
+            const usr = await Users.create(con);
+            const usr_volunteer = await Users_volunteers.create(con);
+            const assigneds = await usr_volunteer.findAll({where:{fk_id_volunteer:req.params.id}})
+            const ids = assigneds.map(element=>{
+                return element.dataValues.fk_id_user
+            })
+            res.json(await usr.findAll({where:{id:{[Op.in]:ids}}}))
+        } catch (error) {
+            res.send(error)
+        } finally {
+            await conexion.cerrar(con);
+        }
+    }
 }
 
 module.exports = user

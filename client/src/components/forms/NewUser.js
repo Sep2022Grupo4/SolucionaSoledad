@@ -92,7 +92,7 @@ function NewUser() {
         <HeadTitle title="Formulario usuaria/os" />
         <div className="form">
             <div>
-                < div className="centrado marginadoTop">
+                < div className="centrado  marginadoTop">
                     <label className="centrado">
                         <input
                             hidden
@@ -103,7 +103,7 @@ function NewUser() {
                             placeholder=""
                             onChange={handleImageChange}
                         />
-                        <div className="centrado">
+                        <div className="centrado upload">
                             <FontAwesomeIcon icon={faUpload} className="iconoupload" />
                             <p>Elige una imagen</p>
                         </div>

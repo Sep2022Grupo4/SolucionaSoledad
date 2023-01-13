@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
     });
   });
 
-
+app.use('/Images', express.static('Images'));
   
 app.listen(port, () => console.log(`Server ON: ${port}`));
 

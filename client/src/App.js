@@ -6,7 +6,8 @@ import UserContext from './context/UserContext';
 import Home from './components/Home';
 import NewUser from './components/forms/NewUser';
 import NewVolunteer from './components/forms/NewVolunteer';
-import NavBar from './components/NavBar';
+import UsuariosAsignados from './components/UsuariosAsignados';
+import DetalleUsuario from './components/DetalleUsuario';
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/nuevoUsuario" element={<NewUser />} />
             <Route path="/nuevoVoluntario" element={<NewVolunteer />} />
+            <Route path="/usuariosAsignados/:id" element={<UsuariosAsignados />} />
+            <Route path="/detalleUsuario/:id" element={<DetalleUsuario />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,12 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseUser, faPeopleGroup, faListCheck, faPalette, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
+import NavBarVolunt from "./NavBarVolunt";
+import UserContext from "../context/UserContext";
+import { useCookies } from "react-cookie";
 
 function NavBar() {
+    const [cookies, setCookie, removeCookie] = useCookies(['session']);
+    const { user, setUser } = useContext(UserContext)
+    const [logged, setLogged] = useState(false)
+  
+    useEffect(() => {
+      if (cookies.session && user.name != "JsonWebTokenError") {
+        setLogged(true)
+      }
+    })
+  
+    useEffect(() => {
+      async function getUser() {
+        if (!user) {
+          const res = await fetch("/getLogged")
+          const userData = await res.json()
+          setUser(userData)
+        }
+      }
+      getUser();
+    })
 
-
-    return (<div className="NavBar">
+    if(user.rol==="Technical"){
+    return (
+    <div>
+        <div className="bottom-margin"></div>
+    
+    <div className="NavBar">
         <Link to={"/"}>
             <div className="btn-NavBar">
                 <FontAwesomeIcon icon={faHouseUser} />
@@ -14,7 +41,7 @@ function NavBar() {
                 <div className="over-btn" id="over-btn-home"></div>
             </div>
         </Link>
-        <Link to={"/usuarios"}>
+        <Link to={"/usuariosAsignados"}>
             <div className="btn-NavBar">
                 <FontAwesomeIcon icon={faPeopleGroup} />
                 <p className="sub-btn-NavBar">Usuarios/as</p>
@@ -35,7 +62,10 @@ function NavBar() {
                 <div className="over-btn" id="over-btn-tareas"></div>
             </div>
         </Link>
-    </div>)
+    </div></div>)
+    } else if (user.rol ==="Non-technical"){
+        return <NavBarVolunt user={user}/>
+    }
 }
 
 

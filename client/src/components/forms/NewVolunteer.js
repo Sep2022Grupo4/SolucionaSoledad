@@ -108,7 +108,7 @@ function NewVolunteer() {
                             placeholder=""
                             onChange={handleImageChange}
                         />
-                        <div className="centrado">
+                        <div className="centrado upload">
                             <FontAwesomeIcon icon={faUpload} className="iconoupload" />
                             <p>Elige una imagen</p>
                         </div>
