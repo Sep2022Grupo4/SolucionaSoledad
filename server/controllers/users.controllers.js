@@ -10,12 +10,14 @@ const user = {
      * @param {JSON} res 
      */
     register: async (req, res) => {
+        console.log(req.body)
         const con = await conexion.abrir(req.cookies.session);
         try {
-            const { first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments } = req.body;
+            const { first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, avatar } = req.body;
             const usr = await Users.create(con);
-            const newUser = await usr.create({ first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments });
+            const newUser = await usr.create({ first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, strikes:0, avatar});
             const data = newUser.dataValues
+            console.log(data)
             res.json(true)
         } catch (error) {
             console.log(error)

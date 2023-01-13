@@ -15,10 +15,10 @@ const volunteer = {
     register: async (req, res) => {
         const con = await conexion.abrir(req.cookies.session);
         try {
-            const { first_name, last_name, email, phone_number, birth_date, pass, location, postal_code, availability, studies, car, rol, volunteer_since, comments } = req.body;
+            const { first_name, last_name, email, phone_number, birth_date, pass, location, postal_code, availability, studies, car, rol, volunteer_since, comments, avatar } = req.body;
             const volunt = await Volunteer.create(con);
             const pass_hash = bcrypt.hashSync(pass, 8);
-            const newvolunteer = await volunt.create({ first_name, last_name, email, phone_number, birth_date, pass: pass_hash, location, postal_code, availability, studies, car, rol:"Non-technical", volunteer_since, comments });
+            const newvolunteer = await volunt.create({ first_name, last_name, email, phone_number, birth_date, pass: pass_hash, location, postal_code, availability, studies, car, rol:"Non-technical", volunteer_since, comments, avatar });
             const data = newvolunteer.dataValues
             res.json(data)
         } catch (error) {

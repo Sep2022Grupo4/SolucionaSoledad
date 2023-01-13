@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HeadTitle from "../HeadTitle";
 import NavBar from "../NavBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 function NewUser() {
 
@@ -11,10 +14,7 @@ function NewUser() {
     const [postal_code, setPostal_code] = useState("")
     const [phone_number, setPhone_number] = useState("")
     const [email, setEmail] = useState("")
-    const [healthIssues, setHealthIssues] = useState("")
-    const [pass2, setPass2] = useState("")
-    const [availability, setAvailability] = useState("")
-    const [studies, setStudies] = useState("")
+    const [health_issues, setHealth_issues] = useState("")
     const [car, setCar] = useState(false)
     const [juegos, setJuegos] = useState(false)
     const [reuniones, setReuniones] = useState(false)
@@ -23,36 +23,98 @@ function NewUser() {
     const [cocina, setCocina] = useState(false)
     const [manualidades, setManualidades] = useState(false)
     const [comments, setComments] = useState("")
+    const navigate = useNavigate()
+    const [enabled, setEnabled] = useState(false)
+    const [imagen, setImagen] = useState(null);
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append("file", imagen.file);
+        const responseImage = await fetch("/upload", {
+            method: "POST",
+            body: formData,
+        });
+        const operation = await responseImage.json()
+        console.log(operation)
+        if (operation.status) {
+            var avatar = operation.path
+        }
+        
+        const interests = JSON.stringify({ juegos, reuniones, musica, baile, cocina, manualidades })
+        const body = { first_name, last_name, birth_date, location, postal_code, phone_number, health_issues, email, car, comments, interests, avatar }
+        const response = await fetch("/user-register", {
+            method: "POST",
+            mode: "cors",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        })
+        const status = await response.json()
+        console.log(status)
+        if (status) {
+            navigate("/")
+        } else {
+            alert("Algo no ha ido bien.")
+        }
 
     }
 
     const checkCarSi = () => {
         const carNo = document.getElementById("car-no")
-            carNo.checked = false
-            setCar(true)
+        carNo.checked = false
+        setCar(true)
     }
     const checkCarNo = () => {
         const carSi = document.getElementById("car-si")
-            carSi.checked = false
-            setCar(false)
+        carSi.checked = false
+        setCar(false)
     }
-    const setEnable= (value)=>{
+    const setEnable = (value) => {
         const button = document.getElementById("btn-register-user")
-        if(value){
-            button.disabled =false
-        }else{
-            button.disabled=true
-        }
-
+        if (value) {
+            button.disabled = false;
+            setEnabled(true)
+        } else { button.disabled = true }
 
     }
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+
+        setImagen({
+            file: file,
+            //Esta url sirve para mostrar una previsualización de la imagen en la etiqueta <img>
+            imagePreviewUrl: URL.createObjectURL(file)
+        });
+    }
+
 
     return (<div className="NewUser">
-        <HeadTitle title="Formulario usuaria/os"/>
+        <HeadTitle title="Formulario usuaria/os" />
         <div className="form">
+            <div>
+                < div className="centrado marginadoTop">
+                    <label className="centrado">
+                        <input
+                            hidden
+                            required
+                            type="file"
+                            className="form-control"
+                            id="imagen"
+                            placeholder=""
+                            onChange={handleImageChange}
+                        />
+                        <div className="centrado">
+                            <FontAwesomeIcon icon={faUpload} className="iconoupload" />
+                            <p>Elige una imagen</p>
+                        </div>
+                    </label>
+                </div>
+                {imagen && <div className="form-group centrado marginadoTop">
+                    <h4>Previsualización</h4>
+                    <img src={imagen.imagePreviewUrl} alt="Preview" className="imgPreview" />
+                </div>}
+            </div>
+
             <div className="form-group">
                 <label className="">Nombre</label>
                 <input type="text" onChange={(e) => setFirst_name(e.target.value)} />
@@ -83,33 +145,33 @@ function NewUser() {
             </div>
             <div className="form-group">
                 <label className="">Enfermedades y medicamentos</label>
-                <textarea  onChange={(e) => setHealthIssues(e.target.value)} />
+                <textarea onChange={(e) => setHealth_issues(e.target.value)} />
             </div>
             <div className="form-group">
                 <label className="">Actividades de interés</label>
                 <div className="check-interest">
                     <div className="check-group-interest">
-                        <input type="checkbox"  onClick={(e)=>setJuegos(e.target.checked)} />
+                        <input type="checkbox" onClick={(e) => setJuegos(e.target.checked)} />
                         <p className=" sinmargenP">Juegos de mesa</p>
                     </div>
                     <div className="check-group-interest">
-                        <input type="checkbox"  onClick={(e)=>setReuniones(e.target.checked)} />
+                        <input type="checkbox" onClick={(e) => setReuniones(e.target.checked)} />
                         <p className=" sinmargenP" >Reuniones</p>
                     </div>
                     <div className="check-group-interest">
-                        <input type="checkbox"  onClick={(e)=>setMusica(e.target.checked)} />
+                        <input type="checkbox" onClick={(e) => setMusica(e.target.checked)} />
                         <p className=" sinmargenP">Música</p>
                     </div>
                     <div className="check-group-interest">
-                        <input type="checkbox"  onClick={(e)=>setBaile(e.target.checked)} />
+                        <input type="checkbox" onClick={(e) => setBaile(e.target.checked)} />
                         <p className=" sinmargenP" >Baile</p>
                     </div>
                     <div className="check-group-interest">
-                        <input type="checkbox"  onClick={(e)=>setCocina(e.target.checked)} />
+                        <input type="checkbox" onClick={(e) => setCocina(e.target.checked)} />
                         <p className=" sinmargenP">Cocina</p>
                     </div>
                     <div className="check-group-interest">
-                        <input type="checkbox"  onClick={(e)=>setManualidades(e.target.checked)} />
+                        <input type="checkbox" onClick={(e) => setManualidades(e.target.checked)} />
                         <p className=" sinmargenP" >Manualidades</p>
                     </div>
                 </div>
@@ -129,22 +191,24 @@ function NewUser() {
             </div>
             <div className="form-group">
                 <label className="">Comentarios</label>
-                <textarea  onChange={(e) => setComments(e.target.value)} />
+                <textarea onChange={(e) => setComments(e.target.value)} />
             </div>
             <div className="form-group">
                 <div className="check-group">
-                    <input type="checkbox" id="car-si" onClick={(e)=>setEnable(e.target.checked)} />
-                    <p style={{ fontWeight:"200", fontSize:"12px" }}>Acepto la</p><a href="" style={{color:"red", fontWeight:"200", fontSize:"12px", textDecoration:"underline" }}>Politica de privacidad de datos</a>
+                    <input type="checkbox" id="car-si" onClick={(e) => setEnable(e.target.checked)} />
+                    <p style={{ fontWeight: "200", fontSize: "12px" }}>Acepto la</p><a href="" style={{ color: "red", fontWeight: "200", fontSize: "12px", textDecoration: "underline" }}>Politica de privacidad de datos</a>
                 </div>
             </div>
-
         </div>
-        <div className="centrado">
-            <button className="centrado" id="btn-register-user" onClick={handleSubmit}>Registrar</button>
-        </div>
+        {
+            enabled ?
+                <button className="centrado" id="btn-register-user" onClick={handleSubmit}>Añadir</button>
+                :
+                <button className="centrado" id="btn-register-user" onClick={handleSubmit} disabled>Añadir</button>
+        }
         <div className="bottom-margin"></div>
         <NavBar />
-    </div>)
+    </div >)
 }
 
 
