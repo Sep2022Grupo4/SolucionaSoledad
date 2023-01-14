@@ -93,7 +93,7 @@ function NewVolunteer() {
     }
 
 
-    return (<div className="NewUser">
+    return (<div className="Home">
         <HeadTitle title="Formulario voluntaria/os" />
         <div className="form">
         <div>

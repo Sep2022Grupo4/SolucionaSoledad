@@ -25,10 +25,7 @@ function LogOut() {
         }
         isLogged()
     })
-    return (
-        <div>
-            {!hide && <button className="log-out"><FontAwesomeIcon icon={faPowerOff} onClick={handleLogOut} /></button>}
-        </div>)
+    if(!hide){return <button className="log-out"><FontAwesomeIcon icon={faPowerOff} onClick={handleLogOut} /></button>}
 
 }
 

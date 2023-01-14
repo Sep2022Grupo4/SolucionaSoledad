@@ -6,9 +6,11 @@ import UserContext from './context/UserContext';
 import Home from './components/Home';
 import NewUser from './components/forms/NewUser';
 import NewVolunteer from './components/forms/NewVolunteer';
-import UsuariosAsignados from './components/UsuariosAsignados';
-import DetalleUsuario from './components/DetalleUsuario';
+import UsuariosAsignados from './components/pages/UsuariosAsignados';
+import DetalleUsuario from './components/pages/DetalleUsuario';
 import LogOut from './components/LogOut';
+import CrearEventos from './components/forms/CrearEventos';
+import NewEvent from './components/forms/NewEvent';
 
 function App() {
 
@@ -25,6 +27,9 @@ function App() {
             <Route path="/nuevoVoluntario" element={<NewVolunteer />} />
             <Route path="/usuariosAsignados/:id" element={<UsuariosAsignados />} />
             <Route path="/detalleUsuario/:id" element={<DetalleUsuario />} />
+            <Route path="/crearEventos" element={<CrearEventos />} />
+            <Route path="/NewEvent" element={<NewEvent/>} />
+
           </Routes>
         </div>
       </BrowserRouter>

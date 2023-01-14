@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "./NavBar";
-import ReportOverlay from "./ReportOverlay";
+import NavBar from "../NavBar";
+import ReportOverlay from "../ReportOverlay";
 
 function DetalleUsuario() {
     const [show, setShow] = useState(false)

@@ -18,9 +18,10 @@ label{
 
 }
 .form{
-  width: 280px;
+  width: 80%;
   display: flex;
   flex-direction: column;
+  margin-left: 10%;
 }
 .form input, .form select{
   height: 40px;
@@ -165,13 +166,6 @@ color: #818181;
   width: 100%;
 }
 
-.NewUser{
-  background-color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .head-title{
   position:fixed;
   width: 100%;
@@ -221,6 +215,8 @@ textarea {
   overflow: scroll;
   resize: none;
   height: 159px;
+  border: 1px solid #C8C3C3;
+
 }
 .check-interest{
   padding:0px 8px;
@@ -248,6 +244,11 @@ a{
 
 .upload p{
   margin-left:10px;
+}
+
+.btn-centrado{
+  display: flex;
+  justify-content: center;
 }
 
 /* ------------------------------------------------------------ Usuarios asignados--------------------- */
@@ -367,7 +368,7 @@ line-height: 17px;color: #2C2C2C;
 /* ------------------------------------------------------------Overlay--------------------------------- */
 
 .ReportOverlay{
-  z-index: 4;
+  z-index: 5;
   display: block;
   width: 100%;
   height: 150%;
@@ -435,4 +436,27 @@ flex-direction: column;
   top: 7px;
   right: 20px;
   font-size: 28px;
+}
+
+/* -------------------------------------------------Crear Evento------------------------------ */
+
+.crear-evento{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.btn-plus {
+  font-size: 45px;
+  color: #e20615;
+}
+
+.crear-evento p{
+  margin-top: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #2C2C2C;
 }

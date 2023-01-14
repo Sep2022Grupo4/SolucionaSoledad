@@ -2,6 +2,7 @@ const router = require("express").Router();
 const ticket = require("../controllers/tickets.controllers");
 const user = require("../controllers/users.controllers");
 const volunteer = require('../controllers/volunteers.controllers')
+const events = require("../controllers/events.controllers")
 
 //USER
 
@@ -23,6 +24,10 @@ router.get("/getLogged", volunteer.getLogged)
 //TICKETS
 
 router.post("/newTicket", ticket.insert)
+
+//EVENTS
+
+router.post("/newEvent", events.create)
 
 
 module.exports = router;

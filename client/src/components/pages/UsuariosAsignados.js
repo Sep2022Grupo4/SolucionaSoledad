@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import NavBar from "./NavBar";
-import HeadTitle from "./HeadTitle";
-import UserContext from "../context/UserContext";
+import NavBar from "../NavBar";
+import HeadTitle from "../HeadTitle";
+import UserContext from "../../context/UserContext";
 import { useCookies } from "react-cookie";
-import Login from './Login'
+import Login from '../Login'
 import { useNavigate, useParams } from "react-router-dom";
 
 function UsuariosAsignados() {
