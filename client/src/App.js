@@ -8,6 +8,7 @@ import NewUser from './components/forms/NewUser';
 import NewVolunteer from './components/forms/NewVolunteer';
 import UsuariosAsignados from './components/UsuariosAsignados';
 import DetalleUsuario from './components/DetalleUsuario';
+import LogOut from './components/LogOut';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <div className="App">
+          <LogOut/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/nuevoUsuario" element={<NewUser />} />

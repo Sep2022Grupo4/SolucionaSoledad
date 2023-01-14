@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const ticket = require("../controllers/tickets.controllers");
 const user = require("../controllers/users.controllers");
 const volunteer = require('../controllers/volunteers.controllers')
 
@@ -19,6 +20,9 @@ router.get("/volunteer/:id", volunteer.getvolunteerData)
 router.post("/volunteer-register", volunteer.register)
 router.get("/getLogged", volunteer.getLogged)
 
+//TICKETS
+
+router.post("/newTicket", ticket.insert)
 
 
 module.exports = router;

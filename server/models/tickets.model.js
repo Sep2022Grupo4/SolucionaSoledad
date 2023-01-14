@@ -8,10 +8,6 @@ ticketModel= {
                 autoIncrement: true,
                 primaryKey: true
             },
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
             description_: {
                 type: DataTypes.STRING,
                 allowNull: true
@@ -25,6 +21,10 @@ ticketModel= {
                 allowNull: true
             },
             fk_id_volunteer: {
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
+            fk_id_user: {
                 type: DataTypes.INTEGER,
                 allowNull: true
             }

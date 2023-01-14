@@ -48,8 +48,8 @@ function UsuariosAsignados() {
                     return(
                         <div className="user-card" onClick={()=>navigate(`/detalleUsuario/${element.id}`)} key={i}>
                             <img className="imgGrid" src={`http://localhost:5000/Images/${element.avatar}`} alt="Avatar" />
-                            <p>{element.first_name},{getAge(element.birth_date)}</p>
-                            <p>{element.location}</p>
+                            <p className="card-user-title">{element.first_name.split(" ")[0]}, {getAge(element.birth_date)}</p>
+                            <p className="card-user-subtitle">{element.location}</p>
                         </div>
                     )
                 })
