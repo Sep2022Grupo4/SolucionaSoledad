@@ -3,10 +3,10 @@ const Events_ = require("../models/events_.model");
 const event_ = {
     create: async (req, res) => {
         const con = await conexion.abrir(req.cookies.session);
-        const { title, location, date_, theme, description_ } = req.body
+        const { name_, location, date_, theme, description_ } = req.body
         try {
             const evnt = await Events_.create(con);
-            const newEvnt = await evnt.create({ title, location, date_, theme, description_ })
+            const newEvnt = await evnt.create({ name_, location, date_, theme, description_ })
             console.log(newEvnt)
             res.json(true)
         } catch (error) {

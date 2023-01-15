@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HeadTitle from "../HeadTitle";
 import NavBar from "../NavBar";
-import DatePicker from 'react-datepicker'
 
 function NewEvent() {
 
-    const [title, setTitle] = useState("")
+    const [name_, setName] = useState("")
     const [location, setLocation] = useState("")
+    const [postal_code, setPostal_code] = useState("")
     const [date_, setDate] = useState("")
     const [description_, setDescription] = useState("")
     const [theme, setTheme] = useState("")
@@ -30,7 +30,7 @@ function NewEvent() {
 
     const handleSubmit = async () => {
 
-        const body = { title, location, date_, theme, description_ }
+        const body = { name_, location, date_, theme, description_ }
         const response = await fetch("/newEvent", {
             method: "POST",
             mode: "cors",
@@ -46,22 +46,29 @@ function NewEvent() {
         }
 
     }
-    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    //Esto limita la fecha programada a partir de hoy.
+    const today = new Date().toISOString().split(".")[0]
+
 
     return (<div className="Home">
         <HeadTitle title="Nuevo evento" />
         <div className="form">
             <div className="form-group">
                 <label className="">Título</label>
-                <input type="text" onChange={(e) => setTitle(e.target.value)} />
+                <input type="text" onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="form-group">
                 <label className="">Localización</label>
                 <input type="text" onChange={(e) => setLocation(e.target.value)} />
             </div>
             <div className="form-group">
+                <label className="">Código postal</label>
+                <input type="text" onChange={(e) => setPostal_code(e.target.value)} />
+            </div>
+            <div className="form-group">
                 <label className="">Fecha programada</label>
-                <input type="datetime-local" min={"2023-02-01"} onChange={(e) => setDate(e.target.value)} />
+                <input type="datetime-local" min={today} onChange={(e) => setDate(e.target.value)} />
             </div>
 
             <div className="form-group">
