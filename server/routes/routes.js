@@ -13,6 +13,7 @@ router.get("/increaseStrike/:id", user.increaseStrikes)
 router.get("/resetStrikes", user.resetStrikes)
 router.get("/getUser/:id", user.getUserData)
 router.get("/getUsers", user.getUsers)
+router.get("/getUsersByName/:input", user.getUsersByName)
 
 //VOLUNTEER / TECNIC
 

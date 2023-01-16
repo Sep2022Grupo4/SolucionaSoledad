@@ -1,7 +1,7 @@
 const Users = require("../models/users.model")
 const conexion = require("../database/mysql")
 const { Op } = require("sequelize");
-const Users_volunteers  = require("../models/users_volunteers.model")
+const Users_volunteers = require("../models/users_volunteers.model")
 
 
 const user = {
@@ -16,7 +16,7 @@ const user = {
         try {
             const { first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, avatar } = req.body;
             const usr = await Users.create(con);
-            const newUser = await usr.create({ first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, strikes:0, avatar});
+            const newUser = await usr.create({ first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, strikes: 0, avatar });
             const data = newUser.dataValues
             console.log(data)
             res.json(true)
@@ -122,17 +122,41 @@ const user = {
             await conexion.cerrar(con);
         }
     },
-    getUsers: async (req, res)=>{
+    getUsers: async (req, res) => {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const usr = await Users.create(con);
-            res.json(await usr.findAll())
+            res.json(await usr.findAll({
+                order: [
+                    ['last_contact', 'ASC']
+                ]
+            }))
         } catch (error) {
             res.send(error)
         } finally {
             await conexion.cerrar(con);
         }
-    }
+    },
+    getUsersByName: async (req, res) => {
+        const con = await conexion.abrir(req.cookies.session);
+        try {
+            const usr = await Users.create(con);
+            console.log(req.params.input)
+            res.json(await usr.findAll({
+                where: {
+                    [Op.or]: [
+                        { first_name: { [Op.like]: `%${req.params.input}%` } },
+                        { last_name: { [Op.like]: `%${req.params.input}%` } }
+                    ]
+                }
+            }))
+        } catch (error) {
+            res.send(error)
+        } finally {
+            await conexion.cerrar(con);
+        }
+    },
+
 }
 
 module.exports = user

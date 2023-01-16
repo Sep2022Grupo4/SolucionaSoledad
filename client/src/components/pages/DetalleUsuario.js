@@ -10,13 +10,7 @@ function DetalleUsuario() {
     const [userData, setUserData] = useState("")
     const { id } = useParams()
     const [interests, setInterests] = useState("")
-    useEffect(() => {
-        if (userData) {
-            const interests_ = JSON.parse(userData.interests)
-            const filteredKeys = Object.keys(interests_).filter(key => interests_[key] === true);
-            setInterests(filteredKeys.join(', '));
-        }
-    })
+
 
     useEffect(() => {
         async function getUserData() {
@@ -29,7 +23,22 @@ function DetalleUsuario() {
             }
         }
         getUserData();
+    }, [])
+
+    useEffect(() => {
+        async function formarInterests() {
+            if (userData) {
+                console.log(userData.interests)
+                const interests_ = await JSON.parse(userData.interests)
+                const filteredKeys = Object.keys(interests_).filter(key => interests_[key] === true);
+                setInterests(filteredKeys.join(', '));
+            }
+        }
+        formarInterests()
     })
+
+
+
 
     const getAge = (birth_date) => {
         let hoy = new Date()
@@ -43,45 +52,48 @@ function DetalleUsuario() {
 
     return (<div className="Home">
         {show && <ReportOverlay setShow={setShow} id={id} />}
-        <img className="img-usuario-detalle" src={`http://localhost:5000/Images/${userData.avatar}`} alt="Avatar" />
-        <div className="banner-user">
-            <p className="banner-user-name">{userData.first_name}, {getAge(userData.birth_date)}</p>
-            <p className="banner-user-lastname">{userData.last_name}</p>
-        </div>
-        <div className="user-functions">
-            <button className="centrado" onClick={handleShow}>REPORTAR</button>
-            <a href={`tel:${userData.phone_number}`}><button className="centrado">LLAMAR</button></a>
-            <button className="centrado btn-invisible"></button>
-        </div>
-        <div className="detail-group">
-            <label>Dirección</label>
-            <p>{userData.location}</p>
-        </div>
-        {userData && <div className="btn-map">
-            <a style={{ color: "#E20613" }} href={`https://www.google.es/maps/place/${userData.location.replace(" ", "+")}/`}>
-                <FontAwesomeIcon icon={faLocationArrow} />
-            </a>
+
+        {userData && <div>
+            <img className="img-usuario-detalle" src={`http://localhost:5000/Images/${userData.avatar}`} alt="Avatar" />
+            <div className="banner-user">
+                <p className="banner-user-name">{userData.first_name}, {getAge(userData.birth_date)}</p>
+                <p className="banner-user-lastname">{userData.last_name}</p>
+            </div>
+            <div className="user-functions">
+                <button className="centrado" onClick={handleShow}>REPORTAR</button>
+                <a href={`tel:${userData.phone_number}`}><button className="centrado">LLAMAR</button></a>
+                <button className="centrado btn-invisible"></button>
+            </div>
+            <div className="detail-group">
+                <label>Dirección</label>
+                <p>{userData.location}</p>
+            </div>
+            {userData && <div className="btn-map">
+                <a style={{ color: "#E20613" }} href={`https://www.google.es/maps/place/${userData.location.replace(" ", "+")}/`}>
+                    <FontAwesomeIcon icon={faLocationArrow} />
+                </a>
+            </div>}
+            <div className="detail-group">
+                <label>Teléfono</label>
+                <p>{userData.phone_number}</p>
+            </div>
+            <div className="detail-group">
+                <label>Intereses</label>
+                <p>{interests + "."}</p>
+            </div>
+            <div className="detail-group">
+                <label>Enfermedades o dolencias</label>
+                <p>{userData.health_issues}</p>
+            </div>
+            <div className="detail-group">
+                <label>Necesita coche</label>
+                <p>{userData.car ? "si" : "no"}</p>
+            </div>
+            <div className="detail-group">
+                <label>Comentarios</label>
+                <p>{userData.comments}</p>
+            </div>
         </div>}
-        <div className="detail-group">
-            <label>Teléfono</label>
-            <p>{userData.phone_number}</p>
-        </div>
-        <div className="detail-group">
-            <label>Intereses</label>
-            <p>{interests +"."}</p>
-        </div>
-        <div className="detail-group">
-            <label>Enfermedades o dolencias</label>
-            <p>{userData.health_issues}</p>
-        </div>
-        <div className="detail-group">
-            <label>Necesita coche</label>
-            <p>{userData.car ? "si" : "no"}</p>
-        </div>
-        <div className="detail-group">
-            <label>Comentarios</label>
-            <p>{userData.comments}</p>
-        </div>
         <NavBar />
     </div>)
 }
