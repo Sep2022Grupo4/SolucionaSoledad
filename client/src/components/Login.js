@@ -23,9 +23,9 @@ function Login(props) {
                 const res = await fetch("/getLogged")
                 const userData = await res.json()
                 setUser(userData)
+                props.setLogged(true)
         }
         getUser();
-        props.setLogged(true)
 
     }
 

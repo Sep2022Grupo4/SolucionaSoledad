@@ -59,7 +59,15 @@ userModel = {
             comments:{
                 type: DataTypes.STRING,
                 allowNull: true
-            }
+            },
+            last_contact: {
+                type: DataTypes.DATE,
+                allowNull: true
+            },
+            priority: {
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
         }, {
             timestamps: false
         });
