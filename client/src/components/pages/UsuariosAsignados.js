@@ -69,7 +69,7 @@ function UsuariosAsignados() {
                 {(usersData && view ==="all" )&& usersData.map((element, i) => {
                     return (
                         <div className="user-card" onClick={() => navigate(`/detalleUsuario/${element.id}`)} key={i}>
-                            <img className="imgGrid" src={`http://localhost:5000/Images/${element.avatar}`} alt="Avatar" />
+                            <img className="imgGrid" src={`/Images/${element.avatar}`} alt="Avatar" />
                             <p className="card-user-title">{element.first_name.split(" ")[0]}, {getAge(element.birth_date)}</p>
                             <p className="card-user-subtitle">{element.location}</p>
                             <p className="card-user-subtitle">Ult. contacto: {new Date(element.last_contact).toLocaleDateString('es-ES')}</p>
@@ -84,7 +84,7 @@ function UsuariosAsignados() {
              {(usersFinded && view ==="search" )&& usersFinded.map((element, i) => {
                  return (
                      <div className="user-card" onClick={() => navigate(`/detalleUsuario/${element.id}`)} key={i}>
-                         <img className="imgGrid" src={`http://localhost:5000/Images/${element.avatar}`} alt="Avatar" />
+                         <img className="imgGrid" src={`/Images/${element.avatar}`} alt="Avatar" />
                          <p className="card-user-title">{element.first_name.split(" ")[0]}, {getAge(element.birth_date)}</p>
                          <p className="card-user-subtitle">{element.location}</p>
                          <p className="card-user-subtitle">Ult. contacto: {new Date(element.last_contact).toLocaleDateString('es-ES')}</p>

@@ -327,7 +327,7 @@ background-color: #e2061571;
   color: white;
   background: #e206157c;
 
-  top:53vh;
+  top:54.01vh;
 }
 
 .banner-user-name{
@@ -448,7 +448,7 @@ flex-direction: column;
 
 .log-out{
   z-index: 5;
-  background-color: #e206155e;
+  background-color: #e20615;
   color:#ffffff;
   border: none;
   position: fixed;

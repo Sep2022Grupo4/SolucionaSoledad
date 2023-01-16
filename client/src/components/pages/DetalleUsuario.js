@@ -7,6 +7,7 @@ import ReportOverlay from "../ReportOverlay";
 
 function DetalleUsuario() {
     const [show, setShow] = useState(false)
+    const [showResume, setShowResume] = useState(false)
     const [userData, setUserData] = useState("")
     const { id } = useParams()
     const [interests, setInterests] = useState("")
@@ -52,9 +53,9 @@ function DetalleUsuario() {
 
     return (<div className="Home">
         {show && <ReportOverlay setShow={setShow} id={id} />}
-
+        {}
         {userData && <div>
-            <img className="img-usuario-detalle" src={`http://localhost:5000/Images/${userData.avatar}`} alt="Avatar" />
+            <img className="img-usuario-detalle" src={`/Images/${userData.avatar}`} alt="Avatar" />
             <div className="banner-user">
                 <p className="banner-user-name">{userData.first_name}, {getAge(userData.birth_date)}</p>
                 <p className="banner-user-lastname">{userData.last_name}</p>
