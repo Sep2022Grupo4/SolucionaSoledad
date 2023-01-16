@@ -12,7 +12,7 @@ router.post("/user-update", user.update)
 router.get("/increaseStrike/:id", user.increaseStrikes)
 router.get("/resetStrikes", user.resetStrikes)
 router.get("/getUser/:id", user.getUserData)
-router.get("/getAssigned/:id", user.getAssigned)
+router.get("/getUsers", user.getUsers)
 
 //VOLUNTEER / TECNIC
 
@@ -28,6 +28,7 @@ router.post("/newTicket", ticket.insert)
 //EVENTS
 
 router.post("/newEvent", events.create)
+router.get("/getEvents", events.getEvents)
 
 
 module.exports = router;

@@ -122,16 +122,11 @@ const user = {
             await conexion.cerrar(con);
         }
     },
-    getAssigned: async (req, res)=>{
+    getUsers: async (req, res)=>{
         const con = await conexion.abrir(req.cookies.session);
         try {
             const usr = await Users.create(con);
-            const usr_volunteer = await Users_volunteers.create(con);
-            const assigneds = await usr_volunteer.findAll({where:{fk_id_volunteer:req.params.id}})
-            const ids = assigneds.map(element=>{
-                return element.dataValues.fk_id_user
-            })
-            res.json(await usr.findAll({where:{id:{[Op.in]:ids}}}))
+            res.json(await usr.findAll())
         } catch (error) {
             res.send(error)
         } finally {

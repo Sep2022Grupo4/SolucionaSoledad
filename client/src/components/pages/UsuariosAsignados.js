@@ -25,13 +25,12 @@ function UsuariosAsignados() {
 
     useEffect(() => {
         async function getUserAsigned() {
-            console.log(user)
-                const res = await fetch(`/getAssigned/${id}`)
+                const res = await fetch(`/getUsers`)
                 const usersFinded = await res.json()
                 setUsersData(usersFinded)
+                console.log(usersFinded)
         }
         getUserAsigned();
-        console.log("ddd")
     },[])
         
     const getAge= (birth_date)=>{
@@ -50,6 +49,7 @@ function UsuariosAsignados() {
                             <img className="imgGrid" src={`http://localhost:5000/Images/${element.avatar}`} alt="Avatar" />
                             <p className="card-user-title">{element.first_name.split(" ")[0]}, {getAge(element.birth_date)}</p>
                             <p className="card-user-subtitle">{element.location}</p>
+                            <p className="card-user-subtitle">{element.last_contact}</p>
                         </div>
                     )
                 })

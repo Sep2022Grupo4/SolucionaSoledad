@@ -19,14 +19,14 @@ conexion = {
         if (data.data.rol == "Technical") {
             console.log("Conectado como Technical")
             sequelize = new Sequelize('cruzroja', process.env.MYSQL_USER, process.env.MYSQL_PASS, {
-                host: 'localhost',
+                host: process.env.MYSQL_URL,
                 dialect: 'mysql',
                 port: 3306
             })
         } else {
             console.log("Conectado como voluntario")
             sequelize = new Sequelize('cruzroja', process.env.MYSQL_USER_VOLUNTEER, process.env.MYSQL_PASS_VOLUNTEER, {
-                host: 'localhost',
+                host: process.env.MYSQL_URL,
                 dialect: 'mysql',
                 port: 3306
             })
