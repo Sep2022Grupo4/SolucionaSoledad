@@ -1,5 +1,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken')
+const fs=require("fs");
+const cCA = fs.readFileSync(`${__dirname}/../DigiCertGlobalRootCA.crt.pem`)
 
 conexion = {
     abrir: async (cookies) => {
@@ -21,14 +23,22 @@ conexion = {
             sequelize = new Sequelize('cruzroja', process.env.MYSQL_USER, process.env.MYSQL_PASS, {
                 host: process.env.MYSQL_URL,
                 dialect: 'mysql',
-                port: 3306
+                port: 3306,
+                dialectOptions: {
+                    ssl: {
+                      ca: cCA
+                    }}
             })
         } else {
             console.log("Conectado como voluntario")
             sequelize = new Sequelize('cruzroja', process.env.MYSQL_USER_VOLUNTEER, process.env.MYSQL_PASS_VOLUNTEER, {
                 host: process.env.MYSQL_URL,
                 dialect: 'mysql',
-                port: 3306
+                port: 3306,
+                dialectOptions: {
+                    ssl: {
+                      ca: cCA
+                    }}
             })
         }
 
