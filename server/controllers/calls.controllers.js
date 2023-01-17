@@ -3,7 +3,8 @@ const Calls = require("../models/calls.model");
 const calls = {
     startCall: async (req, res) => {
         const con = await conexion.abrir(req.cookies.session);
-        const { fk_id_from, fk_id_to, time_start } = req.body
+        const { fk_id_from, time_start } = req.body
+        const fk_id_to = parseInt(req.body.fk_id_to)
         console.log(req.body)
         try {
             const call = await Calls.create(con);
@@ -21,8 +22,9 @@ const calls = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const { time_finish, answer, id } = req.body
+            console.log(req.body)
             const call = await Calls.create(con);
-            const newcall = await call.update({ time_finish, answer }, { where: { id } })
+            const newcall = await call.update({ time_finish, answer }, { where: { id:id } })
             console.log("UPDATEEEEEEEEEE")
 
             res.json(true)

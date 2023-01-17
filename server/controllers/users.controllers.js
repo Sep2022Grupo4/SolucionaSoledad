@@ -74,7 +74,7 @@ const user = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const usr = await Users.create(con);
-            const userf = await usr.findByPk(id)
+            const userf = await usr.findByPk(req.params.id)
             const strikes = userf.dataValues.strikes
             const setter = await usr.update({ strikes: strikes + 1 }, { where: { id: req.params.id } });
             res.json(true)
@@ -95,7 +95,7 @@ const user = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const usr = await Users.create(con);
-            const userf = await usr.findByPk(id)
+            const userf = await usr.findByPk(req.params.id)
             const strikes = userf.dataValues.strikes
             const setter = await usr.update({ strikes: 0 }, { where: { id: req.params.id } });
             res.json(true)

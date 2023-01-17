@@ -67,8 +67,8 @@ function DetalleUsuario() {
                 time_start: new Date()
             })
         })
-        const callData = res.json()
-        console.log(callData)
+        const callData = await res.json()
+        console.log("calldata",callData.id)
         setCall_id(callData.id)
     }
 
