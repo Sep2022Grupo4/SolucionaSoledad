@@ -1,4 +1,5 @@
 function ResumeCall(props) {
+    const call_id = props.call_id
 
     const handleResume = async (call_answer) => {
         async function finish() {
@@ -7,7 +8,7 @@ function ResumeCall(props) {
                 mode: "cors",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    id: props.call_id,
+                    id: call_id,
                     time_finish: new Date(),
                     answer: call_answer
                 })
