@@ -77,9 +77,10 @@ const user = {
             const userf = await usr.findByPk(id)
             const strikes = userf.dataValues.strikes
             const setter = await usr.update({ strikes: strikes + 1 }, { where: { id: req.params.id } });
-            res.json(setter)
+            res.json(true)
         } catch (error) {
-            res.json(error);
+            console.log(error)
+            res.json(false);
         } finally {
             await conexion.cerrar(con);
         }
@@ -97,9 +98,10 @@ const user = {
             const userf = await usr.findByPk(id)
             const strikes = userf.dataValues.strikes
             const setter = await usr.update({ strikes: 0 }, { where: { id: req.params.id } });
-            res.json(setter)
+            res.json(true)
         } catch (error) {
-            res.json(error);
+            console.log(error)
+            res.json(false);
         } finally {
             await conexion.cerrar(con);
         }

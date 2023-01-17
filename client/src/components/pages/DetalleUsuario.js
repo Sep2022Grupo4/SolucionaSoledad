@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar";
 import ReportOverlay from "../ReportOverlay";
+import UserContext from "../../context/UserContext";
+import ResumeCall from "../ResumeCall"
 
 function DetalleUsuario() {
     const [show, setShow] = useState(false)
@@ -11,6 +13,8 @@ function DetalleUsuario() {
     const [userData, setUserData] = useState("")
     const { id } = useParams()
     const [interests, setInterests] = useState("")
+    const {user} = useContext(UserContext)
+    const [call_id, setCall_id]=useState("")
 
 
     useEffect(() => {
@@ -24,7 +28,7 @@ function DetalleUsuario() {
             }
         }
         getUserData();
-    }, [])
+    },[])
 
     useEffect(() => {
         async function formarInterests() {
@@ -36,7 +40,7 @@ function DetalleUsuario() {
             }
         }
         formarInterests()
-    })
+    },[userData])
 
 
 
@@ -50,10 +54,27 @@ function DetalleUsuario() {
     const handleShow = () => {
         setShow(true)
     }
+    const handleShowResume = async() => {
+        console.log("start llamada")
+        setShowResume(true)
+        const res = await fetch("/startCall",{
+            method:"POST",
+            mode:"cors",
+            headers: { 'Content-Type': 'application/json' },
+            body:JSON.stringify({
+                fk_id_from:user.id,
+                fk_id_to:id,
+                time_start: new Date()
+            })
+        })
+        const callData = res.json()
+        console.log(callData)
+        setCall_id(callData.id)
+    }
 
     return (<div className="Home">
         {show && <ReportOverlay setShow={setShow} id={id} />}
-        {}
+        {showResume&&<ResumeCall id_user={id} call_id={call_id} setShowResume={setShowResume} />}
         {userData && <div>
             <img className="img-usuario-detalle" src={`/Images/${userData.avatar}`} alt="Avatar" />
             <div className="banner-user">
@@ -62,12 +83,12 @@ function DetalleUsuario() {
             </div>
             <div className="user-functions">
                 <button className="centrado" onClick={handleShow}>REPORTAR</button>
-                <a href={`tel:${userData.phone_number}`}><button className="centrado">LLAMAR</button></a>
-                <button className="centrado btn-invisible"></button>
+                <button className="centrado">VISITA</button>
+                <a href={`tel:${userData.phone_number}`}onClick={handleShowResume}><button className="centrado" >LLAMAR</button></a>
             </div>
             <div className="detail-group">
                 <label>Dirección</label>
-                <p>{userData.location}</p>
+                <p>{userData.location}</p> 
             </div>
             {userData && <div className="btn-map">
                 <a style={{ color: "#E20613" }} href={`https://www.google.es/maps/place/${userData.location.replace(" ", "+")}/`}>

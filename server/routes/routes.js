@@ -3,6 +3,7 @@ const ticket = require("../controllers/tickets.controllers");
 const user = require("../controllers/users.controllers");
 const volunteer = require('../controllers/volunteers.controllers')
 const events = require("../controllers/events.controllers")
+const calls = require("../controllers/calls.controllers")
 
 //USER
 
@@ -10,7 +11,7 @@ router.post("/user-register", user.register)
 router.post("/setAvatar", user.setAvatar)
 router.post("/user-update", user.update)
 router.get("/increaseStrike/:id", user.increaseStrikes)
-router.get("/resetStrikes", user.resetStrikes)
+router.get("/resetStrikes/:id", user.resetStrikes)
 router.get("/getUser/:id", user.getUserData)
 router.get("/getUsers", user.getUsers)
 router.get("/getUsersByName/:input", user.getUsersByName)
@@ -30,6 +31,11 @@ router.post("/newTicket", ticket.insert)
 
 router.post("/newEvent", events.create)
 router.get("/getEvents", events.getEvents)
+
+//CALLS
+
+router.post("/startCall", calls.startCall)
+router.post("/finishCall", calls.finishCall)
 
 
 module.exports = router;
