@@ -35,7 +35,7 @@ function Home() {
   if (logged) {
     return (
       <div className="Home">
-        {user.avatar ? <img className="avatar-home" src={`http://localhost:5000/Images/${user.avatar}`} alt="avatar" /> : <img className="avatar-home" src={avatar} alt="avatar" />}
+        {user.avatar ? <img className="avatar-home" src={`/Images/${user.avatar}`} alt="avatar" /> : <img className="avatar-home" src={avatar} alt="avatar" />}
         <p className="nombre-home">Hola {user.first_name}</p>
         {user.rol === "Non-technical" && <VolunteerHome />}
         {user.rol === "Technical" && <TecnicoHome />}

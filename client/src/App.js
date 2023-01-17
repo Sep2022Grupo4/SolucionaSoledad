@@ -1,6 +1,5 @@
 import './App.css';
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie"
 import { Routes, Route, useNavigate, BrowserRouter } from "react-router-dom";
 import UserContext from './context/UserContext';
 import Home from './components/Home';
@@ -25,7 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/nuevoUsuario" element={<NewUser />} />
             <Route path="/nuevoVoluntario" element={<NewVolunteer />} />
-            <Route path="/usuariosAsignados/:id" element={<UsuariosAsignados />} />
+            <Route path="/usuariosAsignados" element={<UsuariosAsignados />} />
             <Route path="/detalleUsuario/:id" element={<DetalleUsuario />} />
             <Route path="/crearEventos" element={<CrearEventos />} />
             <Route path="/NewEvent" element={<NewEvent/>} />

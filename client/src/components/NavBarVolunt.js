@@ -17,7 +17,7 @@ function NavBarVolunt(props) {
                 <p className="sub-btn-NavBar">Home</p>
                 <div className="over-btn" id="over-btn-home"></div>
             </div>
-            <div className="btn-NavBar" onClick={(e)=>{navigate(`/usuariosAsignados/${user.id}`)}}>
+            <div className="btn-NavBar" onClick={(e)=>{navigate(`/usuariosAsignados`)}}>
                 <FontAwesomeIcon icon={faPeopleGroup} />
                 <p className="sub-btn-NavBar">Usuarios/as</p>
                 <div className="over-btn" id="over-btn-usuarios"></div>
