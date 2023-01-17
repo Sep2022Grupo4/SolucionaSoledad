@@ -1,36 +1,39 @@
 const DataTypes = require('sequelize');
-
-tasks_model= {
+calls_model= {
     create: async (sequelize) => {
-        const Tasks = sequelize.define('tasks', {
+        const Calls = sequelize.define('calls', {
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true
             },
-            fk_id_volunteer: {
+            fk_id_from: {
                 type: DataTypes.INTEGER,
                 allowNull: true
             },
-            fk_id_user: {
+            fk_id_to: {
                 type: DataTypes.INTEGER,
                 allowNull: true
             },
-            description_: {
-                type: DataTypes.STRING,
+            time_start: {
+                type: DataTypes.DATE,
                 allowNull: true
             },            
-            date_: {
+            time_finish: {
                 type: DataTypes.DATE,
+                allowNull: true
+            },            
+            answer: {
+                type: DataTypes.BOOLEAN,
                 allowNull: true
             }
         }, {
             timestamps: false
         });
 
-        return Tasks;
+        return Calls;
 
     }
 }
 
-module.exports = tasks_model; 
+module.exports = calls_model; 

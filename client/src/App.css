@@ -32,7 +32,17 @@ label{
   flex-direction: column;
   margin-top: 8px;
 }
-
+.buscador{
+  padding-left: 8px;
+  margin: 0px 16px 4px 16px;
+  height: 34px;
+  border: 1px solid #C8C3C3;
+}
+.lupa-input{
+  position: absolute;
+ right: 34px;
+ top:68px;
+}
 
 div.centrado{
   width: 280px;
@@ -169,6 +179,7 @@ color: #818181;
 }
 
 .head-title{
+  z-index: 3;
   position:fixed;
   width: 100%;
   height: 46px;
@@ -259,7 +270,7 @@ a{
   display: grid;
   min-height: 80vh;
   grid-template-columns: repeat(3,1fr);
-  grid-auto-rows: minmax(100px,230px);
+  grid-auto-rows: minmax(100px,250px);
   text-align:center;
   margin: 0 8px
 }
@@ -279,18 +290,23 @@ a{
   border-bottom: 0.5px solid #818181;;
 }
 .card-user-title{
+  position:relative;
+  top:-33px;
   padding-left: 8px;
   text-align: left;
   font-weight: 500;
-font-size: 14px;
+font-size: 12px;
 line-height: 17px;
-color: #2C2C2C;
+color: #ffffff;
+background-color: #e2061571;
 }
 .card-user-subtitle{
+  position:relative;
+  top:-40px;
   padding-left: 8px;
   text-align: left;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 15px;
   color: #818181;
 }
@@ -298,6 +314,7 @@ color: #2C2C2C;
 
 .img-usuario-detalle{
   height: 60vh;
+  max-width: 100vw;
   overflow: hidden;
   object-fit: cover;
   object-position: center;
@@ -310,7 +327,7 @@ color: #2C2C2C;
   color: white;
   background: #e206157c;
 
-  top:53vh;
+  top:54.01vh;
 }
 
 .banner-user-name{
@@ -431,10 +448,10 @@ flex-direction: column;
 
 .log-out{
   z-index: 5;
-  background-color: #e206155e;
+  background-color: #e20615;
   color:#ffffff;
   border: none;
-  position: absolute;
+  position: fixed;
   top: 7px;
   right: 20px;
   font-size: 28px;
