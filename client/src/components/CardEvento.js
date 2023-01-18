@@ -13,6 +13,9 @@ const navigate = useNavigate()
                     <p className="card-title">{props.title}</p>
                     <p className="card-subtitle">{props.date}</p>
                 </div>
+                <div>
+                    <button className="centrado" onClick={()=>{navigate(`/detalleEvento/${props.id}`)}}>VER</button>
+                </div>
             </div>
         </div>
     </div>)

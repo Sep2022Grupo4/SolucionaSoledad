@@ -38,6 +38,7 @@ router.get("/getReports", reports.getAll)
 
 router.post("/newEvent", events.create)
 router.get("/getEvents", events.getEvents)
+router.get("/getEvent/:id", events.getEventById)
 
 //CALLS
 

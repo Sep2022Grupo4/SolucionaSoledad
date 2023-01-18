@@ -29,6 +29,18 @@ const event_ = {
             await conexion.cerrar(con);
         }
     },
+    getEventById:async (req, res) => {
+        const con = await conexion.abrir(req.cookies.session);
+        try {
+            const evnt = await Events_.create(con); 
+            res.json(await evnt.findByPk(req.params.id))
+        } catch (error) {
+            console.log(error)
+            res.send(false)
+        } finally {
+            await conexion.cerrar(con);
+        }
+    },
 }
 
 module.exports = event_

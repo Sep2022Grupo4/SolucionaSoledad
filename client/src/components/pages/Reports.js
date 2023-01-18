@@ -2,13 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import HeadTitle from "../HeadTitle";
-import CardEvento from "../CardEvento";
-import musica from "../../images/musica.png"
-import juegos from "../../images/juegos.png"
-import manualidades from "../../images/manualidades.png"
-import reuniones from "../../images/reuniones.png"
-import bailes from "../../images/bailes.png"
-import cocina from "../../images/cocina.png"
 import ReportView from "../ReportView";
 
 
@@ -37,35 +30,41 @@ function Reports() {
 
     const [reports, setReports] = useState(false);
     const [tickets, setTickets] = useState(false);
+    console.log("reports", reports)
+    console.log("ticket", tickets)
     useEffect(() => {
         async function getReports() {
-            if(!reports){
-            const res = await fetch(`/getReports`)
-            const reportsFinded = await res.json();
-            const report= reportsFinded.map(async(element)=>{
-            let userRes = await fetch(`/getUser/${element.fk_id_user}`)
-            var user = await userRes.json()
-            let volunteerRes = await fetch(`/volunteer/${element.fk_id_volunteer}`)
-            var volunteer = await volunteerRes.json();
-        return {element, user, volunteer}})
-            setReports(report)
-        }}
+            if (!reports) {
+                const res = await fetch(`/getReports`)
+                const reportsFinded = await res.json();
+                const report = reportsFinded.map(async (element) => {
+                    let userRes = await fetch(`/getEvent/${element.fk_id_event}`)
+                    var user = await userRes.json()
+                    console.log(user)
+                    let volunteerRes = await fetch(`/volunteer/${element.fk_id_volunteer}`)
+                    var volunteer = await volunteerRes.json();
+                    return { element, user, volunteer }
+                })
+                setReports(report)
+            }
+        }
         async function getTickets() {
-                if(!tickets){
-                    const res = await fetch(`/getTickets`)
-                    const ticketsFinded = await res.json();
-                    const ticket= await ticketsFinded.map(async(element)=>{
+            if (!tickets) {
+                const res = await fetch(`/getTickets`)
+                const ticketsFinded = await res.json();
+                const ticket = await ticketsFinded.map(async (element) => {
                     let userRes = await fetch(`/getUser/${element.fk_id_user}`)
                     var user = await userRes.json()
                     let volunteerRes = await fetch(`/volunteer/${element.fk_id_volunteer}`)
                     var volunteer = await volunteerRes.json();
-                return {element, user, volunteer}})
-                    setTickets(ticket)
-        }}
+                    return { element, user, volunteer }
+                })
+                setTickets(ticket)
+            }
+        }
         getReports();
         getTickets();
     }, [view])
-
 
 
 
@@ -75,8 +74,12 @@ function Reports() {
             <div className="select-date-filter" id="tickets" onClick={() => setView("tickets")}><p>Usuarios</p> </div>
             <div className="select-date-filter" id="reports" onClick={() => setView("reports")}><p> Eventos</p></div>
         </div>
-       {(view==="tickets" && tickets)&& tickets.map((element,i)=>{
-           return <ReportView element={element} key={i}/>
+        {(view === "tickets" && tickets) && tickets.map((element, i) => {
+            return <ReportView type={"ticket"} element={element} key={i} />
+        })
+        }
+        {(view === "reports" && reports) && reports.map((element, i) => {
+            return <ReportView type={"report"} element={element} key={i} />
         })
         }
         <div className="bottom-margin"></div>

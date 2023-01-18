@@ -58,7 +58,6 @@ function Talleres() {
             let today = new Date()
             let dateE = new Date(element.date_)
             let diffInDays = (dateE.getTime() - today.getTime()) / (1000 * 3600 * 24);
-            console.log(diffInDays);
             var imgMini;
             switch (tema) {
                 case "musica":
@@ -82,19 +81,16 @@ function Talleres() {
                 default:
                     break;
             }
-            console.log("today::", today)
-            console.log("event::", element.date_)
-            console.log(today - (new Date(element.date_)))
 
             if (view === "past" && diffInDays < 0) {
                 let dateString = dateE.toLocaleString()
-                return <CardEvento title={element.name_} date={(dateString)} image={imgMini} key={i} />
+                return <CardEvento id={element.id} title={element.name_} date={(dateString)} image={imgMini} key={i} />
             } else if (view === "week" && diffInDays < 7 && diffInDays > 0) {
                 let dateString = dateE.toLocaleString()
-                return <CardEvento title={element.name_} date={(dateString)} image={imgMini} key={i} />
+                return <CardEvento id={element.id} title={element.name_} date={(dateString)} image={imgMini} key={i} />
             } else if (view === "month" && diffInDays < 31 && diffInDays > 0) {
                 let dateString = dateE.toLocaleString()
-                return <CardEvento title={element.name_} date={(dateString)} image={imgMini} key={i} />
+                return <CardEvento id={element.id} title={element.name_} date={(dateString)} image={imgMini} key={i} />
             }
         })}
         <div className="bottom-margin"></div>

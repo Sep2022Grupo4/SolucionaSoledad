@@ -94,13 +94,13 @@ function CrearEventos() {
 
             if (view === "past" && diffInDays < 0) {
                 let dateString = dateE.toLocaleString()
-                return <CardEvento title={element.name_} date={(dateString)} image={imgMini} key={i} />
+                return <CardEvento id={element.id} title={element.name_} date={(dateString)} image={imgMini} key={i} />
             } else if (view === "week" && diffInDays < 7 && diffInDays > 0) {
                 let dateString = dateE.toLocaleString()
-                return <CardEvento title={element.name_} date={(dateString)} image={imgMini} key={i} />
+                return <CardEvento id={element.id} title={element.name_} date={(dateString)} image={imgMini} key={i} />
             } else if (view === "month" && diffInDays < 31 && diffInDays > 0) {
                 let dateString = dateE.toLocaleString()
-                return <CardEvento title={element.name_} date={(dateString)} image={imgMini} key={i} />
+                return <CardEvento id={element.id} title={element.name_} date={(dateString)} image={imgMini} key={i} />
             }
         })}
         <div className="bottom-margin"></div>
