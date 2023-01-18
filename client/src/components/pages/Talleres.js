@@ -16,6 +16,11 @@ function Talleres() {
     const navigate = useNavigate()
     const [view, setView] = useState("past")
 
+    useEffect(()=>{
+        var overbtn = document.getElementById("over-btn-talleres")
+        if(overbtn){overbtn.style.visibility="visible"}
+      }) 
+
     useEffect(() => {
         async function rstBold() {
             const buttons = [].slice.call(document.getElementsByClassName("select-date-filter"));

@@ -9,6 +9,10 @@ import ReportView from "../ReportView";
 function Reports() {
     const navigate = useNavigate()
     const [view, setView] = useState("tickets")
+    useEffect(()=>{
+        var overbtn = document.getElementById("over-btn-reportes")
+        if(overbtn){overbtn.style.visibility="visible"}
+      }) 
 
     useEffect(() => {
         async function rstBold() {

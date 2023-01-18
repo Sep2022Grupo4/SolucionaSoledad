@@ -18,6 +18,11 @@ function UsuariosAsignados() {
     const [input, setInput] = useState("")
     const [view, setView] = useState("all")
 
+    useEffect(()=>{
+        var overbtn = document.getElementById("over-btn-usuarios")
+        if(overbtn){overbtn.style.visibility="visible"}
+      }) 
+
     useEffect(() => {
         async function searchUsers() {
             var res = await fetch(`/getUsersByName/${input}`)

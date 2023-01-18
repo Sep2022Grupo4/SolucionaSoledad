@@ -13,6 +13,7 @@ import NewEvent from './components/forms/NewEvent';
 import Talleres from './components/pages/Talleres';
 import Reports from './components/pages/Reports';
 import DetalleEvento from './components/pages/DetalleEvento';
+import {Stats} from './components/pages/Estadisticas';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/talleres" element={<Talleres/>} />
             <Route path="/reports" element={<Reports/>} />
             <Route path="/detalleEvento/:id" element={<DetalleEvento />} />
+            <Route path="/stats/" element={<Stats />} />
           </Routes>
         </div>
       </BrowserRouter>
