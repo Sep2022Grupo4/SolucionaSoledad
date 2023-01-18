@@ -1,5 +1,3 @@
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
@@ -14,7 +12,7 @@ import cocina from "../../images/cocina.png"
 
 
 
-function CrearEventos() {
+function Talleres() {
     const navigate = useNavigate()
     const [view, setView] = useState("past")
 
@@ -49,11 +47,7 @@ function CrearEventos() {
     }, [])
 
     return (<div className="Home">
-        <HeadTitle title={"Gestionar eventos"} />
-        <div className="crear-evento" onClick={() => { navigate("/newEvent") }}>
-            <FontAwesomeIcon icon={faCirclePlus} className="btn-plus" />
-            <p>Crear evento</p>
-        </div>
+        <HeadTitle title={"Eventos"} />
         <div className="select-bar">
             <div className="select-date-filter" id="past" onClick={() => setView("past")}><p>Anteriores</p> </div>
             <div className="select-date-filter" id="week" onClick={() => setView("week")}><p> Esta semana</p></div>
@@ -64,7 +58,6 @@ function CrearEventos() {
             let today = new Date()
             let dateE = new Date(element.date_)
             let diffInDays = (dateE.getTime() - today.getTime()) / (1000 * 3600 * 24);
-            console.log(diffInDays);
             var imgMini;
             switch (tema) {
                 case "musica":
@@ -88,9 +81,6 @@ function CrearEventos() {
                 default:
                     break;
             }
-            console.log("today::", today)
-            console.log("event::", element.date_)
-            console.log(today - (new Date(element.date_)))
 
             if (view === "past" && diffInDays < 0) {
                 let dateString = dateE.toLocaleString()
@@ -109,4 +99,4 @@ function CrearEventos() {
 }
 
 
-export default CrearEventos;
+export default Talleres;

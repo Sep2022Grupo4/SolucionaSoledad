@@ -1,6 +1,5 @@
-import { useContext } from "react";
+
 import { useNavigate } from "react-router-dom";
-import ViewContext from "../context/UserContext";
 
 function CardEvento(props) {
 
@@ -14,6 +13,7 @@ const navigate = useNavigate()
                     <p className="card-title">{props.title}</p>
                     <p className="card-subtitle">{props.date}</p>
                 </div>
+                    <button className="centrado" onClick={()=>{navigate(`/detalleEvento/${props.id}`)}}>VER</button>
             </div>
         </div>
     </div>)

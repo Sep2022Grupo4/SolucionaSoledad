@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 function NewVolunteer() {
-    
+
     const [first_name, setFirst_name] = useState("")
     const [last_name, setLast_name] = useState("")
     const [birth_date, setBirth_date] = useState("")
@@ -39,10 +39,10 @@ function NewVolunteer() {
             });
             const operation = await responseImage.json()
             console.log(operation)
-            if(operation.status){
+            if (operation.status) {
                 var avatar = operation.path
             }
-            
+
             const body = { first_name, last_name, birth_date, location, postal_code, phone_number, email, pass, availability, studies, car, volunteer_since, comments, avatar }
             const response = await fetch("/volunteer-register", {
                 method: "POST",
@@ -73,14 +73,7 @@ function NewVolunteer() {
         carSi.checked = false
         setCar(false)
     }
-    const setEnable = (value) => {
-        const button = document.getElementById("btn-register-volunteer")
-        if (value) {
-            button.disabled = false;
-            setEnabled(true)
-        } else { button.disabled = true }
 
-    }
     const [enabled, setEnabled] = useState(false)
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -96,7 +89,7 @@ function NewVolunteer() {
     return (<div className="Home">
         <HeadTitle title="Formulario voluntaria/os" />
         <div className="form">
-        <div>
+            <div>
                 < div className="centrado marginadoTop">
                     <label className="centrado">
                         <input
@@ -121,27 +114,27 @@ function NewVolunteer() {
             </div>
             <div className="form-group">
                 <label className="">Nombre</label>
-                <input type="text" onChange={(e) => setFirst_name(e.target.value)} />
+                <input type="text" onChange={(e) => setFirst_name(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Apellidos</label>
-                <input type="text" onChange={(e) => setLast_name(e.target.value)} />
+                <input type="text" onChange={(e) => setLast_name(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Fecha de nacimiento</label>
-                <input type="date" onChange={(e) => setBirth_date(e.target.value)} />
+                <input type="date" onChange={(e) => setBirth_date(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Dirección</label>
-                <input type="text" onChange={(e) => setLocation(e.target.value)} />
+                <input type="text" onChange={(e) => setLocation(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Código postal</label>
-                <input type="number" onChange={(e) => setPostal_code(e.target.value)} />
+                <input type="number" onChange={(e) => setPostal_code(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Teléfono</label>
-                <input type="text" onChange={(e) => setPhone_number(e.target.value)} />
+                <input type="text" onChange={(e) => setPhone_number(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Email</label>
@@ -149,11 +142,11 @@ function NewVolunteer() {
             </div>
             <div className="form-group">
                 <label className="">Contraseña</label>
-                <input type="password" onChange={(e) => setPass(e.target.value)} />
+                <input type="password" onChange={(e) => setPass(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Repetir contraseña</label>
-                <input type="password" onChange={(e) => setPass2(e.target.value)} />
+                <input type="password" onChange={(e) => setPass2(e.target.value)} required />
             </div>
             <div className="form-group">
                 <label className="">Disponibilidad</label>
@@ -193,20 +186,9 @@ function NewVolunteer() {
                 <label className="">Comentarios</label>
                 <textarea onChange={(e) => setComments(e.target.value)} />
             </div>
-            <div className="form-group">
-                <div className="check-group">
-                    <input type="checkbox" id="car-si" onClick={(e) => setEnable(e.target.checked)} />
-                    <p style={{ fontWeight: "200", fontSize: "12px" }}>Acepto la</p><a href="" style={{ color: "red", fontWeight: "200", fontSize: "12px", textDecoration: "underline" }}>Politica de privacidad de datos</a>
-                </div>
-            </div>
         </div>
-        <div className="centrado">
-            {enabled ?
-                <button className="centrado" id="btn-register-volunteer" onClick={handleSubmit}>Añadir</button>
-                :
-                <button className="centrado" id="btn-register-volunteer" onClick={handleSubmit} disabled>Añadir</button>
-            }
-
+        <div className="boton-aceptar">
+            <button className="centrado" id="btn-register-volunteer" onClick={handleSubmit}>Añadir</button>
         </div>
         <div className="bottom-margin"></div>
         <NavBar />

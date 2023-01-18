@@ -1,4 +1,6 @@
 const Events_ = require("../models/events_.model");
+const Users = require("../models/users.model");
+const twilio = require("./twilio.controllers")
 
 const event_ = {
     create: async (req, res) => {
@@ -6,7 +8,8 @@ const event_ = {
         const { name_, location, date_, theme, description_ } = req.body
         try {
             const evnt = await Events_.create(con);
-            const newEvnt = await evnt.create({ name_, location, date_, theme, description_ })
+            const newEvnt = await evnt.create({ name_, location, date_, theme, description_ })     
+            twilio.twilio("Mihai", newEvnt.dataValues.name_, newEvnt.dataValues.date_, newEvnt.dataValues.location)
             console.log(newEvnt)
             res.json(true)
         } catch (error) {
@@ -22,6 +25,18 @@ const event_ = {
             const evnt = await Events_.create(con);
             const newEvnt = await evnt.findAll()
             res.json(newEvnt)
+        } catch (error) {
+            console.log(error)
+            res.send(false)
+        } finally {
+            await conexion.cerrar(con);
+        }
+    },
+    getEventById:async (req, res) => {
+        const con = await conexion.abrir(req.cookies.session);
+        try {
+            const evnt = await Events_.create(con); 
+            res.json(await evnt.findByPk(req.params.id))
         } catch (error) {
             console.log(error)
             res.send(false)

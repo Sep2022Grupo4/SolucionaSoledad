@@ -69,14 +69,7 @@ function NewUser() {
         carSi.checked = false
         setCar(false)
     }
-    const setEnable = (value) => {
-        const button = document.getElementById("btn-register-user")
-        if (value) {
-            button.disabled = false;
-            setEnabled(true)
-        } else { button.disabled = true }
 
-    }
     const handleImageChange = (event) => {
         const file = event.target.files[0];
 
@@ -112,33 +105,33 @@ function NewUser() {
                     </div>
                     {imagen && <div className="form-group centrado marginadoTop">
                         <h4>Previsualización</h4>
-                        <img src={imagen.imagePreviewUrl} alt="Preview" className="imgPreview" />
+                        <img src={imagen.imagePreviewUrl} alt="Preview" className="imgPreview" required/>
                     </div>}
                 </div>
 
                 <div className="form-group">
                     <label className="">Nombre</label>
-                    <input type="text" onChange={(e) => setFirst_name(e.target.value)} />
+                    <input type="text" onChange={(e) => setFirst_name(e.target.value)} required/>
                 </div>
                 <div className="form-group">
                     <label className="">Apellidos</label>
-                    <input type="text" onChange={(e) => setLast_name(e.target.value)} />
+                    <input type="text" onChange={(e) => setLast_name(e.target.value)} required/>
                 </div>
                 <div className="form-group">
                     <label className="">Fecha de nacimiento</label>
-                    <input type="date" onChange={(e) => setBirth_date(e.target.value)} />
+                    <input type="date" onChange={(e) => setBirth_date(e.target.value)} required/>
                 </div>
                 <div className="form-group">
                     <label className="">Dirección</label>
-                    <input type="text" onChange={(e) => setLocation(e.target.value)} />
+                    <input type="text" onChange={(e) => setLocation(e.target.value)} required/>
                 </div>
                 <div className="form-group">
                     <label className="">Código postal</label>
-                    <input type="number" onChange={(e) => setPostal_code(e.target.value)} />
+                    <input type="number" onChange={(e) => setPostal_code(e.target.value)} required />
                 </div>
                 <div className="form-group">
                     <label className="">Teléfono</label>
-                    <input type="text" onChange={(e) => setPhone_number(e.target.value)} />
+                    <input type="text" onChange={(e) => setPhone_number(e.target.value)} required/>
                 </div>
                 <div className="form-group">
                     <label className="">Email</label>
@@ -194,20 +187,10 @@ function NewUser() {
                     <label className="">Comentarios</label>
                     <textarea onChange={(e) => setComments(e.target.value)} />
                 </div>
-                <div className="form-group">
-                    <div className="check-group">
-                        <input type="checkbox" id="car-si" onClick={(e) => setEnable(e.target.checked)} />
-                        <p style={{ fontWeight: "200", fontSize: "12px" }}>Acepto la</p><a href="" style={{ color: "red", fontWeight: "200", fontSize: "12px", textDecoration: "underline" }}>Politica de privacidad de datos</a>
-                    </div>
-                </div>
+
             </div>
-            <div className="btn-centrado">
-                {
-                    enabled ?
-                        <button className="centrado" id="btn-register-user" onClick={handleSubmit}>Añadir</button>
-                        :
-                        <button className="centrado" id="btn-register-user" onClick={handleSubmit} disabled>Añadir</button>
-                }
+            <div className="boton-aceptar">
+                <button className="centrado" id="btn-register-user" onClick={handleSubmit}>Añadir</button>
             </div>
             <div className="bottom-margin"></div>
             <NavBar />
