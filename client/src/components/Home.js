@@ -28,7 +28,6 @@ function Home() {
       }
     }
     getUser();
-    console.log(user)
   })
 
 

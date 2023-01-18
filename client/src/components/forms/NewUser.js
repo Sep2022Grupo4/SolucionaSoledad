@@ -36,7 +36,7 @@ function NewUser() {
             body: formData,
         });
         const operation = await responseImage.json()
-        console.log(operation)
+  
         if (operation.status) {
             var avatar = operation.path
         }
@@ -50,7 +50,7 @@ function NewUser() {
             body: JSON.stringify(body)
         })
         const status = await response.json()
-        console.log(status)
+   
         if (status) {
             navigate("/")
         } else {

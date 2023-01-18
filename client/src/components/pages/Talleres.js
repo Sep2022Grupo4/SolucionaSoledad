@@ -19,7 +19,6 @@ function Talleres() {
     useEffect(() => {
         async function rstBold() {
             const buttons = [].slice.call(document.getElementsByClassName("select-date-filter"));
-            console.log(buttons)
             buttons.map((e) => {
                 if (e.id === `${view}`) {
                     e.style.fontWeight = "bold"
@@ -40,7 +39,6 @@ function Talleres() {
         async function getEvents() {
             const res = await fetch(`/getEvents`)
             const eventsFinded = await res.json();
-            console.log(eventsFinded)
             setEvents(eventsFinded)
         }
         getEvents();

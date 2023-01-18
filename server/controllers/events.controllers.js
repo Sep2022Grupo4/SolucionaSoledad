@@ -10,7 +10,6 @@ const event_ = {
             const evnt = await Events_.create(con);
             const newEvnt = await evnt.create({ name_, location, date_, theme, description_ })     
             twilio.twilio("Mihai", newEvnt.dataValues.name_, newEvnt.dataValues.date_, newEvnt.dataValues.location)
-            console.log(newEvnt)
             res.json(true)
         } catch (error) {
             console.log(error)

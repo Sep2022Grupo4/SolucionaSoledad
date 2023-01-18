@@ -19,11 +19,10 @@ function DetalleUsuario() {
 
     useEffect(() => {
         async function getUserData() {
-            console.log(userData)
+            
             if (!userData) {
                 const res = await fetch(`/getUser/${id}`)
                 const userDataf = await res.json()
-                console.log(userDataf)
                 setUserData(userDataf)
             }
         }
@@ -33,7 +32,6 @@ function DetalleUsuario() {
     useEffect(() => {
         async function formarInterests() {
             if (userData) {
-                console.log(userData.interests)
                 const interests_ = await JSON.parse(userData.interests)
                 const filteredKeys = Object.keys(interests_).filter(key => interests_[key] === true);
                 setInterests(filteredKeys.join(', '));
@@ -55,7 +53,6 @@ function DetalleUsuario() {
         setShow(true)
     }
     const handleShowResume = async() => {
-        console.log("start llamada")
         setShowResume(true)
         const res = await fetch("/startCall",{
             method:"POST",
@@ -68,7 +65,6 @@ function DetalleUsuario() {
             })
         })
         const callData = await res.json()
-        console.log("calldata",callData.id)
         setCall_id(callData.id)
     }
     const handleVisit = async()=>{

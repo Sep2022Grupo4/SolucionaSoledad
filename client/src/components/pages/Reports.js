@@ -30,8 +30,7 @@ function Reports() {
 
     const [reports, setReports] = useState(false);
     const [tickets, setTickets] = useState(false);
-    console.log("reports", reports)
-    console.log("ticket", tickets)
+
     useEffect(() => {
         async function getReports() {
             if (!reports) {
@@ -40,7 +39,6 @@ function Reports() {
                 const report = reportsFinded.map(async (element) => {
                     let userRes = await fetch(`/getEvent/${element.fk_id_event}`)
                     var user = await userRes.json()
-                    console.log(user)
                     let volunteerRes = await fetch(`/volunteer/${element.fk_id_volunteer}`)
                     var volunteer = await volunteerRes.json();
                     return { element, user, volunteer }

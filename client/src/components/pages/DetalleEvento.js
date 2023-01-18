@@ -26,11 +26,11 @@ function DetalleEvento() {
 
     useEffect(() => {
         async function geteventData() {
-            console.log(eventData)
+          
             if (!eventData) {
                 const res = await fetch(`/getEvent/${id}`)
                 const eventDataf = await res.json()
-                console.log(eventDataf)
+               
                 setEventData(eventDataf)
                 let dateString = new Date(eventDataf.date_)
                 setDate(dateString.toLocaleString("es-ES"))

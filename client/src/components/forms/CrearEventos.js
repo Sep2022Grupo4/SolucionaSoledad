@@ -21,7 +21,6 @@ function CrearEventos() {
     useEffect(() => {
         async function rstBold() {
             const buttons = [].slice.call(document.getElementsByClassName("select-date-filter"));
-            console.log(buttons)
             buttons.map((e) => {
                 if (e.id === `${view}`) {
                     e.style.fontWeight = "bold"
@@ -42,7 +41,6 @@ function CrearEventos() {
         async function getEvents() {
             const res = await fetch(`/getEvents`)
             const eventsFinded = await res.json();
-            console.log(eventsFinded)
             setEvents(eventsFinded)
         }
         getEvents();
@@ -64,7 +62,6 @@ function CrearEventos() {
             let today = new Date()
             let dateE = new Date(element.date_)
             let diffInDays = (dateE.getTime() - today.getTime()) / (1000 * 3600 * 24);
-            console.log(diffInDays);
             var imgMini;
             switch (tema) {
                 case "musica":
@@ -88,9 +85,7 @@ function CrearEventos() {
                 default:
                     break;
             }
-            console.log("today::", today)
-            console.log("event::", element.date_)
-            console.log(today - (new Date(element.date_)))
+
 
             if (view === "past" && diffInDays < 0) {
                 let dateString = dateE.toLocaleString()
