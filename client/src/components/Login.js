@@ -50,6 +50,7 @@ function Login(props) {
 
 
     return (<div className="Login">
+        <div className="logo-login"><img src={logo} alt="Logo Cruz Roja" /></div>
         <div className="form">
             <div className="form-group">
                 <label className="negrita">Email</label>
@@ -65,7 +66,6 @@ function Login(props) {
             <button className="centrado" id="btn-login" onClick={handleLogin}>Entrar</button>
         </div>
 
-        <div className="logo-login"><img src={logo} alt="Logo Cruz Roja" /></div>
     </div>)
 }
 
