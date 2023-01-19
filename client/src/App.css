@@ -628,3 +628,60 @@ align-self: center;
 font-size: 15px;
 line-height: 18px;
 }
+/* ---------------------------------------------------------------------CANVAS---------------------------- */
+
+canvas{
+  margin: 8px;
+height: 45vh !important;
+}
+
+/* ---------------------------------------------------------------------MEDIA---------------------------- */
+@media only screen and (min-width: 480px){
+  body{
+    display: flex;
+    justify-content: center;
+  }
+  #root, Home{
+    width: 480px;
+  }
+  .app{
+    align-self: center;
+    justify-self: center;
+  }
+  .NavBar, .head-title{
+    max-width: 480px;
+  }
+  .lupa-input{
+    z-index: 4;
+    position: relative;
+   left:200px;
+   top:-30px;
+  }
+  
+.log-out{
+  z-index: 5;
+  background-color: #e20615;
+  color:#ffffff;
+  border: none;
+  align-self: flex-end;
+  position: fixed;
+  top: 7px;
+  left: 70%;
+  width: 40px;
+  font-size: 28px;
+}
+}
+@media only screen and (min-width: 1000px){
+  .log-out{
+    z-index: 5;
+    background-color: #e20615;
+    color:#ffffff;
+    border: none;
+    align-self: flex-end;
+    position: fixed;
+    top: 7px;
+    left: 60vw;
+    width: 40px;
+    font-size: 28px;
+  }
+}

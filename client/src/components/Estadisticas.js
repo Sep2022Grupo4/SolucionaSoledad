@@ -9,12 +9,12 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-export function Stats() {
+export function Estadisticas() {
 
   const [usersData, setUsersData] = useState(false)
-  const [labels, setLabels] = useState([])
-  const [dataPop, setDataPop] = useState([])
-  const [data, setData] = useState({})
+  const [labels, setLabels] = useState(null)
+  const [dataPop, setDataPop] = useState(null)
+  const [data, setData] = useState(null)
 
   useEffect(() => {
     async function getUserAsigned() {
@@ -25,19 +25,19 @@ export function Stats() {
       var labelsSet = new Set(localidades)
       var dataLabels = [];
       var labelsb = []
-      for  await (let element of labelsSet) {
+      for await (let element of labelsSet) {
         const population = localidades.filter(x => x === element).length
         dataLabels.push(population);
         labelsb.push(element)
-    }
+      }
       setLabels(labelsb)
       setDataPop(dataLabels)
+  
     }
     getUserAsigned();
-  })
+  }, [])
 
   useEffect(() => {
-    console.log(labels, dataPop)
     if (labels) {
       const datab = {
         labels: labels,
@@ -52,9 +52,7 @@ export function Stats() {
       };
       setData(datab)
     }
-  })
-
-  console.log(data)
+  },[])
 
   ChartJS.register(
     CategoryScale,
@@ -67,25 +65,47 @@ export function Stats() {
 
   const options = {
     indexAxis: 'y',
+    responsive: true,
+    scales: {
+      y: {
+        ticks: {
+            padding: 1,
+            autoSkip: false,
+            textStrokeWidth:1,
+            beginAtZero: true,
+            font: {
+              size: 8
+          }
+        }
+      },
+      x:{
+        ticks:{
+          display:true,
+          autoSkip:false,
+          stepSize: 1
+        }
+      }
+    },
     elements: {
       bar: {
         borderWidth: 1,
       },
-    },
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'right',
-      },
-      title: {
-        display: true,
-        text: 'Usuarios por localidad',
-      },
-    },
+    }
   };
 
+  const datab = {
+    labels,
+    datasets: [
+      {
+        label: 'Usuarios por población',
+        data: dataPop,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  };
 
-  if (data) {
-    return <Bar options={options} data={data} />;
+  if (datab) {
+    return <Bar options={options} data={datab} />;
   }
 }

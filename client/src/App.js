@@ -13,7 +13,7 @@ import NewEvent from './components/forms/NewEvent';
 import Talleres from './components/pages/Talleres';
 import Reports from './components/pages/Reports';
 import DetalleEvento from './components/pages/DetalleEvento';
-import {Stats} from './components/pages/Estadisticas';
+import Stats from './components/pages/Stats';
 
 function App() {
 
