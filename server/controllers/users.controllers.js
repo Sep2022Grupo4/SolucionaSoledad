@@ -11,14 +11,12 @@ const user = {
      * @param {JSON} res 
      */
     register: async (req, res) => {
-        console.log(req.body)
         const con = await conexion.abrir(req.cookies.session);
         try {
             const { first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, avatar } = req.body;
             const usr = await Users.create(con);
             const newUser = await usr.create({ first_name, last_name, email, phone_number, birth_date, location, postal_code, interests, health_issues, car, comments, strikes: 0, avatar });
             const data = newUser.dataValues
-            console.log(data)
             res.json(true)
         } catch (error) {
             console.log(error)
@@ -130,6 +128,7 @@ const user = {
             const usr = await Users.create(con);
             res.json(await usr.findAll({
                 order: [
+                    ['strikes', 'DESC'],
                     ['last_contact', 'ASC']
                 ]
             }))
@@ -143,7 +142,6 @@ const user = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const usr = await Users.create(con);
-            console.log(req.params.input)
             res.json(await usr.findAll({
                 where: {
                     [Op.or]: [

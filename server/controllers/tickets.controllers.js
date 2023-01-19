@@ -13,7 +13,6 @@ const ticket = {
         try {
             const tkt = await Tickets.create(con);
             const newTkt = await tkt.create({ fk_id_user, fk_id_volunteer, description_, status_: "Pendiente", date_ })
-            console.log(newTkt)
             res.json(true)
         } catch (error) {
             console.log(error)
@@ -26,7 +25,11 @@ const ticket = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const tkt = await Tickets.create(con);
-            res.json( await tkt.findAll())
+            res.json( await tkt.findAll({
+                order: [
+                    ['date_', 'DESC']
+                ]
+            }))
         } catch (error) {
             console.log(error)
             res.json(false)

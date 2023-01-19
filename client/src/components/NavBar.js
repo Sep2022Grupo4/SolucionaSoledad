@@ -38,14 +38,14 @@ function NavBar() {
             <div className="btn-NavBar">
                 <FontAwesomeIcon icon={faHouseUser} />
                 <p className="sub-btn-NavBar">Home</p>
-                <div className="over-btn" id="over-btn-home"></div>
+                <div className="over-btn" id="over-btn-home" style={{visibility:"hidden"}}></div>
             </div>
         </Link>
         <Link to={"/usuariosAsignados"}>
             <div className="btn-NavBar">
                 <FontAwesomeIcon icon={faPeopleGroup} />
                 <p className="sub-btn-NavBar">Usuarios/as</p>
-                <div className="over-btn" id="over-btn-usuarios"></div>
+                <div className="over-btn" id="over-btn-usuarios" style={{visibility:"hidden"}}></div>
             </div>
         </Link>
 
@@ -53,7 +53,7 @@ function NavBar() {
             <div className="btn-NavBar">
                 <FontAwesomeIcon icon={faContactBook} />
                 <p className="sub-btn-NavBar">Reportes</p>
-                <div className="over-btn" id="over-btn-tareas"></div>
+                <div className="over-btn" id="over-btn-reportes" style={{visibility:"hidden"}}></div>
             </div>
         </Link>
     </div></div>)

@@ -102,7 +102,6 @@ const volunteer = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             data = jwt.verify(req.cookies.session, process.env.JWT_SECRET)
-            console.log(data)
             const volunt = await Volunteer.create(con);
             res.json(await volunt.findByPk(data.data.id))
         } catch (error) {

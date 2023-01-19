@@ -9,7 +9,6 @@ function LogOut() {
     const [hide, setHide] = useState(false)
     const navigate = useNavigate()
     const handleLogOut = () => {
-        console.log("Me vooooooooooy")
         removeCookie("session");
         navigate("/")
         window.location.reload()
@@ -20,7 +19,6 @@ function LogOut() {
                 setHide(false)
             } else {
                 setHide(true)
-                console.log("owowo")
             }
         }
         isLogged()

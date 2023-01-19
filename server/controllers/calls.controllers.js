@@ -5,11 +5,9 @@ const calls = {
         const con = await conexion.abrir(req.cookies.session);
         const { fk_id_from, time_start } = req.body
         const fk_id_to = parseInt(req.body.fk_id_to)
-        console.log(req.body)
         try {
             const call = await Calls.create(con);
             const newcall = await call.create({ fk_id_from, fk_id_to, time_start })
-            console.log(newcall)
             res.json(newcall)
         } catch (error) {
             console.log(error)
@@ -22,10 +20,8 @@ const calls = {
         const con = await conexion.abrir(req.cookies.session);
         try {
             const { time_finish, answer, id } = req.body
-            console.log(req.body)
             const call = await Calls.create(con);
             const newcall = await call.update({ time_finish, answer }, { where: { id:id } })
-            console.log("UPDATEEEEEEEEEE")
 
             res.json(true)
         } catch (error) {

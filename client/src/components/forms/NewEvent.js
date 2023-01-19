@@ -38,7 +38,7 @@ function NewEvent() {
             body: JSON.stringify(body)
         })
         const status = await response.json()
-        console.log(status)
+  
         if (status) {
             navigate("/")
         } else {

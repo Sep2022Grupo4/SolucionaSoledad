@@ -12,6 +12,11 @@ function Home() {
   const { user, setUser } = useContext(UserContext)
   const [logged, setLogged] = useState(false)
 
+  useEffect(()=>{
+    var overbtn = document.getElementById("over-btn-home")
+    if(overbtn){overbtn.style.visibility="visible"}
+  })
+
   useEffect(() => {
     if (cookies.session && user.name != "JsonWebTokenError") {
       setLogged(true)
@@ -28,7 +33,6 @@ function Home() {
       }
     }
     getUser();
-    console.log(user)
   })
 
 

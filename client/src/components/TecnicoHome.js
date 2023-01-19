@@ -15,6 +15,7 @@ function TecnicoHome() {
         <CardHome title="Dar de alta usuario/as" subtitle="" image={usuarios_asignados} view={"/nuevoUsuario"} />
         <CardHome title="Crear eventos" subtitle="" image={crearEventos} view={"/crearEventos"} />
         <CardHome title="Ver reportes de voluntario/as" subtitle="" image={verReportes} view={"/reports"}/>
+        <CardHome title="Estadísticas" subtitle="" image={asignarTareas} view={"/stats"}/>
 
     </div>)
 }

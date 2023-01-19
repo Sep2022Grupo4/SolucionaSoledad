@@ -18,11 +18,15 @@ function UsuariosAsignados() {
     const [input, setInput] = useState("")
     const [view, setView] = useState("all")
 
+    useEffect(()=>{
+        var overbtn = document.getElementById("over-btn-usuarios")
+        if(overbtn){overbtn.style.visibility="visible"}
+      }) 
+
     useEffect(() => {
         async function searchUsers() {
             var res = await fetch(`/getUsersByName/${input}`)
             var usrFnd = await res.json();
-            console.log(usrFnd)
             setUsersFinded(usrFnd)
         }
         if (input.length === 0) {
@@ -37,7 +41,6 @@ function UsuariosAsignados() {
         if (cookies.session && user.name !== "JsonWebTokenError") {
             setLogged(true)
         }
-        console.log("session")
     }, [])
 
 
@@ -46,7 +49,6 @@ function UsuariosAsignados() {
             const res = await fetch(`/getUsers`)
             const usersFinded = await res.json()
             setUsersData(usersFinded)
-            console.log(usersFinded)
         }
         getUserAsigned();
     }, [])
