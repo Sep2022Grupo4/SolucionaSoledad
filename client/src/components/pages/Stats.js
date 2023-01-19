@@ -4,7 +4,7 @@ import {Estadisticas} from "../Estadisticas"
 function Stats(){
 return (
     (<div className="App">
-            <HeadTitle/>
+            <HeadTitle title={"Estadisticas"}/>
             <Estadisticas/>
             <div className="bottom-margin"></div>
         <NavBar />
