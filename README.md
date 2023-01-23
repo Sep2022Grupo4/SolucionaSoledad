@@ -1,3 +1,0 @@
-# SoledadNoDeseadaFS
-
-Cambio desde GitHub
